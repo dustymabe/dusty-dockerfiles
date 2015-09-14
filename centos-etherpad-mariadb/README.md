@@ -40,7 +40,7 @@ Run etherpad
 Next start the etherpad with the db container linked:
 
 ```
-docker run --link=mariadb:db -d --name etherpad -p 9001:9001 <yourname>/mariadb
+docker run --link=mariadb:db -d --name etherpad -p 9001:9001 <yourname>/etherpad
 ```
 
 Now connect to etherpad on localhost:9001 from your browser.
