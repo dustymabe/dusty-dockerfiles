@@ -20,7 +20,7 @@ Check the image out.
 
 Set up an alias for pdftk:
 
-    # alias pdftk='docker run -it --privileged -v $PWD:/workdir -w /workdir/ <yourname>/pdftk'
+    # alias pdftk='docker run -it --rm --privileged -v $PWD:/workdir -w /workdir/ <yourname>/pdftk'
 
 CD to where the files are and run it:
 
