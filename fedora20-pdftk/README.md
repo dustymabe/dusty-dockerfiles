@@ -2,7 +2,7 @@ dockerfiles-fedora20-pdftk
 ==========================
 
 This repo contains a recipe for making Docker container for pdftk on Fedora 20. 
-pdftk was last packaged for Fedora 20 and thus we can't get the softare in later
+pdftk was last packaged for Fedora 20 and thus we can't get the software in later
 releases (as of 05/2014). Thus we can utilize containers to still run the older 
 software. This has been tested with docker 1.6.0 
 
