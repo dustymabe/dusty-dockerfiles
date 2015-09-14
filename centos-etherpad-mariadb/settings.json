@@ -56,7 +56,7 @@
                     "host"    : "DB_HOST",
                     "port"    : "DB_PORT",
                     "password": "DB_PASS",
-                    "database": "DB_NAME"
+                    "database": "DB_DBID"
                   },
 
   //the default text of a pad
