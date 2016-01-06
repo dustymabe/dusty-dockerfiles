@@ -19,8 +19,16 @@ RUN curl -L https://github.com/ether/etherpad-lite/tarball/1.5.7 | tar -xz --str
 COPY settings.json ./
 # Add startup script
 COPY docker-entrypoint.sh ./
+ 
+# A few workarounds so we can run as non-root on openshift
+RUN mkdir /.npm
+COPY fix-permissions.sh ./
+RUN  ./fix-permissions.sh /.npm
+RUN  ./fix-permissions.sh /var/lib/etherpad
+
+# The random user we choose to run as is 1001
+USER 1001
 
 # Listens on 9001 by default
 EXPOSE 9001
 ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["--root"] # Allows to be run as root user
