@@ -18,7 +18,7 @@ if [ ! -f $REPO/config ]; then
 fi
 
 # Grab metadata
-ostree --repo=$REPO pull --commit-metadata-only --depth=1 "${REMOTE}:${REF}"
+ostree --repo=$REPO pull --commit-metadata-only --depth=-1 "${REMOTE}:${REF}"
 
 echo '<html>'
 
