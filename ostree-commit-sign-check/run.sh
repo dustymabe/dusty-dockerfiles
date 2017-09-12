@@ -3,7 +3,7 @@
 set -eu -o pipefail
 
 VERSION=$1
-REPO="/ostreerepo-${VERSION}"
+REPO="./ostreerepo"
 REMOTE="remote-${VERSION}"
 REF="fedora/${VERSION}/x86_64/atomic-host"
 URL="https://kojipkgs.fedoraproject.org/atomic/${VERSION}/"
