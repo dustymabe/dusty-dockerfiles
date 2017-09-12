@@ -18,7 +18,9 @@ if [ ! -f $REPO/config ]; then
 fi
 
 # Grab metadata
-ostree --repo=$REPO pull --commit-metadata-only --depth=-1 "${REMOTE}:${REF}"
+ostree --repo=$REPO pull --commit-metadata-only --depth=1 "${REMOTE}:${REF}"
+
+echo '<html>'
 
 # Roll through the commits and verify each one is signed
 n=''
@@ -26,10 +28,20 @@ while out=$(ostree --repo=$REPO show "${REF}${n}"); do
         commit=$(echo "$out" | head -n 1 | cut -d ' ' -f 2)
     n+='^'
     commiturl="${URL}/objects/${commit::2}/${commit:2:${#commit}}.commitmeta"
-    echo $commiturl
+
+    printhtml ${commit::7} $commiturl
+
     if ! curl --output /dev/null --silent --head --fail "$commiturl"; then
-        echo "Commit is not signed: $commit"
-        echo "\tURL does not exist: $commiturl"
+        echo "... BAD: URL does not exist: $commiturl<br>"
+    else
+        echo "... GOOD!<br>"
     fi
     echo
 done
+
+echo '</html>'
+
+
+printhtml {
+    echo -n "checking <a href='${1}'>${2}</a>"
+}
