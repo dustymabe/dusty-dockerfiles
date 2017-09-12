@@ -7,8 +7,8 @@ REPO="./ostreerepo"
 REMOTE="remote-${VERSION}"
 # Can define REF or URL as positional args if you like, if not defined
 # will attempt to derive from $VERSION variable
-REF="${$2-fedora/${VERSION}/x86_64/atomic-host}"
-URL="${$3-https://kojipkgs.fedoraproject.org/atomic/${VERSION}/}"
+REF="${2-fedora/${VERSION}/x86_64/atomic-host}"
+URL="${3-https://kojipkgs.fedoraproject.org/atomic/${VERSION}/}"
 
 if [ ! -d $REPO ]; then
     mkdir $REPO
