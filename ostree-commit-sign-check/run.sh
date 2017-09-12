@@ -17,13 +17,16 @@ if [ ! -f $REPO/config ]; then
     ostree --repo=$REPO remote add --no-gpg-verify $REMOTE $URL
 fi
 
+echo '<html>'
+date
+echo '<br>'
+
 # Grab metadata
 ostree --repo=$REPO pull --commit-metadata-only --depth=-1 "${REMOTE}:${REF}"
+echo '<br>'
 
-echo '<html>'
-
-printhtml() {
-    echo -n "checking <a href='${1}'>${2}</a>"
+printhtmllink() {
+    echo -n "<a href='${1}'>${2}</a>"
 }
 
 # Roll through the commits and verify each one is signed
@@ -33,10 +36,13 @@ while out=$(ostree --repo=$REPO show "${REF}${n}"); do
     n+='^'
     commiturl="${URL}/objects/${commit::2}/${commit:2:${#commit}}.commitmeta"
 
-    printhtml $commiturl ${commit::7}
+    echo -n "checking "
+    printhtmllink $commiturl ${commit::7}
 
     if ! curl --output /dev/null --silent --head --fail "$commiturl"; then
-        echo "... BAD: URL does not exist: $commiturl<br>"
+        echo -n "... BAD: URL does not exist: "
+        printhtmllink $commiturl $commiturl
+        echo "<br>"
     else
         echo "... GOOD!<br>"
     fi
