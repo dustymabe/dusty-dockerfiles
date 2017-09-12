@@ -1,5 +1,5 @@
 
-dir=$(basename $0)
+dir=$(dirname $0)
 
 bash $dir/run.sh 26 fedora/26/x86_64/updates/atomic-host
 bash $dir/run.sh 26 fedora/26/x86_64/testing/atomic-host
