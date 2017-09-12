@@ -33,7 +33,7 @@ while out=$(ostree --repo=$REPO show "${REF}${n}"); do
     n+='^'
     commiturl="${URL}/objects/${commit::2}/${commit:2:${#commit}}.commitmeta"
 
-    printhtml ${commit::7} $commiturl
+    printhtml $commiturl ${commit::7}
 
     if ! curl --output /dev/null --silent --head --fail "$commiturl"; then
         echo "... BAD: URL does not exist: $commiturl<br>"
