@@ -5,21 +5,29 @@ set -eu -o pipefail
 VERSION=$1
 REPO="./ostreerepo"
 REMOTE="remote-${VERSION}"
-REF="fedora/${VERSION}/x86_64/atomic-host"
-URL="https://kojipkgs.fedoraproject.org/atomic/${VERSION}/"
+# Can define REF or URL as positional args if you like, if not defined
+# will attempt to derive from $VERSION variable
+REF="${$2-fedora/${VERSION}/x86_64/atomic-host}"
+URL="${$3-https://kojipkgs.fedoraproject.org/atomic/${VERSION}/}"
 
 if [ ! -d $REPO ]; then
     mkdir $REPO
 fi
 
+# Create repo if it doesn't exist
 if [ ! -f $REPO/config ]; then
     ostree --repo=$REPO init --mode=archive-z2
-    ostree --repo=$REPO remote add --no-gpg-verify $REMOTE $URL
 fi
+
+# Add remote if it doesn't exist
+ostree --repo=$REPO remote add --if-not-exists --no-gpg-verify $REMOTE $URL
 
 echo '<html>'
 date
-echo '<br>'
+echo '<br>' 
+echo "<b>Testing $VERSION $REF at $URL</b>" 
+echo '<br>' 
+echo '<br>' 
 
 # Grab metadata
 ostree --repo=$REPO pull --commit-metadata-only --depth=-1 "${REMOTE}:${REF}"
