@@ -22,6 +22,10 @@ ostree --repo=$REPO pull --commit-metadata-only --depth=1 "${REMOTE}:${REF}"
 
 echo '<html>'
 
+printhtml() {
+    echo -n "checking <a href='${1}'>${2}</a>"
+}
+
 # Roll through the commits and verify each one is signed
 n=''
 while out=$(ostree --repo=$REPO show "${REF}${n}"); do
@@ -42,6 +46,3 @@ done
 echo '</html>'
 
 
-printhtml {
-    echo -n "checking <a href='${1}'>${2}</a>"
-}
