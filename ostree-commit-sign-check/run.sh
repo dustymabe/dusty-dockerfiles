@@ -4,11 +4,11 @@ set -eu -o pipefail
 
 VERSION=$1
 REPO="./ostreerepo"
-REMOTE="remote-${VERSION}"
 # Can define REF or URL as positional args if you like, if not defined
 # will attempt to derive from $VERSION variable
 REF="${2-fedora/${VERSION}/x86_64/atomic-host}"
 URL="${3-https://kojipkgs.fedoraproject.org/atomic/${VERSION}/}"
+REMOTE="remote-${REF//\//-}"
 
 if [ ! -d $REPO ]; then
     mkdir $REPO
