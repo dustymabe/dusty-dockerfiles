@@ -51,9 +51,7 @@ while out=$(ostree --repo=$REPO show "${REF}${n}"); do
     printhtmllink $commiturl ${commit::7}
 
     if ! curl --output /dev/null --silent --head --fail "$commiturl"; then
-        echo -n "... BAD: URL does not exist: "
-        printhtmllink $commiturl $commiturl
-        echo "<br>"
+        echo "... BAD: Please run: robosignatory-signatomic $REF $commit<br>"
     else
         echo "... GOOD!<br>"
     fi
