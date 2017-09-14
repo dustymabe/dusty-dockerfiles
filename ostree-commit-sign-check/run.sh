@@ -22,7 +22,7 @@ fi
 # Add remote if it doesn't exist
 ostree --repo=$REPO remote add --if-not-exists --no-gpg-verify $REMOTE $URL
 
-echo '<html><br><font face="Arial">'
+echo '<html><br><font face="Courier New">'
 date
 echo '<br>' 
 echo "<b>Testing $VERSION $REF at $URL</b>" 
