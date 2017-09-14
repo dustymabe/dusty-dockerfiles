@@ -45,7 +45,7 @@ while out=$(ostree --repo=$REPO show "${REF}${n}"); do
     commiturl="${URL}/objects/${commit::2}/${commit:2:${#commit}}.commitmeta"
 
     version=$(ostree --repo=$REPO show $commit --print-metadata-key=version)
-    date=$(ostree --repo=$REPO show $commit --print-metadata-key=date)
+    date=$(ostree --repo=$REPO show $commit | grep Date | cut -d " " -f 3)
 
     echo -n "checking ${date} ${version} " 
     printhtmllink $commiturl ${commit::7}
