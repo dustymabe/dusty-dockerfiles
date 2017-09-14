@@ -58,6 +58,7 @@ while out=$(ostree --repo=$REPO show "${REF}${n}"); do
     echo
 done
 
+echo '<br><hr>'
 echo '</html>'
 
 
