@@ -44,7 +44,10 @@ while out=$(ostree --repo=$REPO show "${REF}${n}"); do
     n+='^'
     commiturl="${URL}/objects/${commit::2}/${commit:2:${#commit}}.commitmeta"
 
-    echo -n "checking "
+    version=$(ostree show $commit --print-metadata-key=version)
+    date=$(ostree show $commit --print-metadata-key=date)
+
+    echo -n "checking ${date} ${version} " 
     printhtmllink $commiturl ${commit::7}
 
     if ! curl --output /dev/null --silent --head --fail "$commiturl"; then
