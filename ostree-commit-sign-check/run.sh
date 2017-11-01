@@ -51,7 +51,7 @@ while out=$(ostree --repo=$REPO show "${REF}${n}"); do
     printhtmllink $commiturl ${commit::7}
 
     if ! curl --output /dev/null --silent --head --fail "$commiturl"; then
-        echo "... BAD: Please run: robosignatory-signatomic $REF $commit --skip-ref-update<br>"
+        echo "... BAD: Please run: robosignatory-signatomic $REF $commit<br>"
     else
         echo "... GOOD!<br>"
     fi
