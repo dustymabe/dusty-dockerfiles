@@ -23,6 +23,7 @@ bash $dir/run.sh rawhide fedora/rawhide/aarch64/atomic-host
 bash $dir/run.sh rawhide fedora/rawhide/x86_64/workstation  https://kojipkgs.fedoraproject.org/compose/ostree/rawhide/
 
 # f26
+bash $dir/run.sh 26 fedora/26/x86_64/atomic-host
 bash $dir/run.sh 26 fedora/26/x86_64/updates/atomic-host
 bash $dir/run.sh 26 fedora/26/x86_64/testing/atomic-host
 bash $dir/run.sh 26 fedora/26/x86_64/workstation  https://kojipkgs.fedoraproject.org/compose/ostree/26/
