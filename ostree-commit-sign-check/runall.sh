@@ -14,7 +14,9 @@ bash $dir/run.sh 27 fedora/27/aarch64/atomic-host
 bash $dir/run.sh 27 fedora/27/aarch64/updates/atomic-host
 bash $dir/run.sh 27 fedora/27/aarch64/testing/atomic-host
 
-bash $dir/run.sh 27 fedora/27/x86_64/workstation  https://kojipkgs.fedoraproject.org/compose/ostree/27/
+bash $dir/run.sh 27 fedora/27/x86_64/workstation         https://dl.fedoraproject.org/ostree/27/
+bash $dir/run.sh 27 fedora/27/x86_64/updates/workstation https://dl.fedoraproject.org/ostree/27/
+bash $dir/run.sh 27 fedora/27/x86_64/testing/workstation https://dl.fedoraproject.org/ostree/27/
 
 # rawhide
 bash $dir/run.sh rawhide fedora/rawhide/x86_64/atomic-host
@@ -26,4 +28,3 @@ bash $dir/run.sh rawhide fedora/rawhide/x86_64/workstation  https://kojipkgs.fed
 bash $dir/run.sh 26 fedora/26/x86_64/atomic-host
 bash $dir/run.sh 26 fedora/26/x86_64/updates/atomic-host
 bash $dir/run.sh 26 fedora/26/x86_64/testing/atomic-host
-bash $dir/run.sh 26 fedora/26/x86_64/workstation  https://kojipkgs.fedoraproject.org/compose/ostree/26/
