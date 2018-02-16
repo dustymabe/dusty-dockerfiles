@@ -53,7 +53,7 @@ def main():
             # We have a compose that either failed or had missing artifacts
             # create a new issue.
             title = msg['msg']['compose_id'] + ' ' + msg['msg']['status']
-            logfile = msg['msg']['location'] + '../logs/global/pungi.global.log'
+            logfile = msg['msg']['location'] + '/../logs/global/pungi.global.log'
 
             # pull only part of the compose ID for the tag to set
             tag = re.search('(.*)-\d{8}', msg['msg']['compose_id']).group(1)
