@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import datetime
 import fedmsg
 import os
 import re
@@ -59,16 +60,31 @@ def main():
     # Set the repo to create new issues against
     pg.repo=PAGURE_REPO
 
+    # Used for printing out a value when the day has changed
+    date = datetime.date.today()
+
     # Grab messages from fedmsg and process them as we go
     logger.info("Starting listening for fedmsgs..") 
     for name, endpoint, topic, msg in fedmsg.tail_messages():
-        if "pungi.compose.status.change" in topic  \
-            and msg['msg']['status'] != 'FINISHED' \
-            and msg['msg']['status'] != 'STARTED':
+
+        # Print out a log statement if the day has changed
+        today = datetime.date.today()
+        if today != date:
+            date = today
+            logger.info('mark')
+
+        if "pungi.compose.status.change" in topic:
+            print('.') # some sort of indicator of progress
+
+            status = msg['msg']['status']
+
+            # If we are in good states then continue
+            if status in ['FINISHED', 'STARTED']:
+                continue
 
             # We have a compose that either failed or had missing artifacts
             # create a new issue.
-            title = msg['msg']['compose_id'] + ' ' + msg['msg']['status']
+            title = msg['msg']['compose_id'] + ' ' + status
             logfileurl = msg['msg']['location'] + '/../logs/global/pungi.global.log'
             logger.info("%s\t%s" % (title, logfileurl))
 
