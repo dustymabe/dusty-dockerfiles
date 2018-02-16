@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import fedmsg
 import re
+import os
 from libpagure import Pagure
 
 # Set logging to not print warnings
