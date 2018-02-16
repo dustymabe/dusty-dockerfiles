@@ -32,7 +32,7 @@ PAGURE_REPO='dusty/failed-composes'
 
 
 
-def main()
+def main():
     # grab token and connec to pagure
     token = os.getenv('PAGURE_TOKEN')
     if token:
