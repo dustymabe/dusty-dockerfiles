@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 import fedmsg
-import re
 import os
+import re
+import requests
 from libpagure import Pagure
 
 # Set fedmsg logging to not print warnings
@@ -64,13 +65,41 @@ def main():
             # create a new issue.
             title = msg['msg']['compose_id'] + ' ' + msg['msg']['status']
             logfileurl = msg['msg']['location'] + '/../logs/global/pungi.global.log'
+            logger.info("%s\t%s" % (title, logfileurl))
+
+            # variable to hold description for issue
+            content = "[pungi.global.log](%s)\n\n" % logfileurl
+
+            lines = requests.get(logfileurl).text.splitlines()
+            for x in range(1, len(lines)):
+                line = lines[x-1][20:]   # trim date off log lines
+                nextline = lines[x][20:] # trim date off log lines
+
+                # If this is a [FAIL] line then we take it and the
+                # next line and add them in markdown format. Also grab
+                # the taskid if we can and print a hyperlink to koji
+                if re.search('\[FAIL\]', line):
+                    r = re.search('.*failed: (\d{8}).*', nextline)
+                    if r:
+                        taskid = r.group(1)
+                        content+= "- [%s](%s%s)\n" % (taskid, KOJI_TASK_URL, taskid)
+                    else:
+                        content+= "- No Task ID, look at log statement\n"
+                    content+= "```\n%s\n%s\n```\n\n" % (line, nextline)
+
+                # If this is the Compose run failed line, then add it
+                # to the description too
+                if re.search('.*Compose run failed.*', line):
+                    content+= "- Compose run failed because:\n"
+                    content+= "```\n%s\n```\n" % (line)
+
+            logger.debug(content)
 
             # pull only part of the compose ID for the tag to set
             tag = re.search('(.*)-\d{8}', msg['msg']['compose_id']).group(1)
             #TODO figure out how to set tag on an issue
 
-            logger.info("%s\t%s" % (title, logfileurl))
-            pg.create_issue(title=title, content=logfile)
+            pg.create_issue(title=title, content=content)
 
 if __name__ == '__main__':
     main()
