@@ -59,7 +59,9 @@ def main():
     # Grab messages from fedmsg and process them as we go
     logger.info("Starting listening for fedmsgs..") 
     for name, endpoint, topic, msg in fedmsg.tail_messages():
-        if "pungi.compose.status.change" in topic and msg['msg']['status'] != 'FINISHED':
+        if "pungi.compose.status.change" in topic 
+            and msg['msg']['status'] != 'FINISHED'
+            and msg['msg']['status'] != 'STARTED':
 
             # We have a compose that either failed or had missing artifacts
             # create a new issue.
