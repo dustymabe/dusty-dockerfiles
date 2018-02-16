@@ -21,6 +21,9 @@ logger.setLevel(logging.INFO)
 # Connect to pagure and set it to point to our repo
 PAGURE_REPO='dusty/failed-composes'
 
+# URL for linking to koji tasks by ID
+KOJI_TASK_URL='https://koji.fedoraproject.org/koji/taskinfo?taskID='
+
 ########import json
 ########msg = json.loads("""{
 ########                "msg": {
