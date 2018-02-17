@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 sh = logging.StreamHandler()
 sh.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
 logger.addHandler(sh)
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 
 # Connect to pagure and set it to point to our repo
@@ -66,6 +66,7 @@ def main():
     # Grab messages from fedmsg and process them as we go
     logger.info("Starting listening for fedmsgs..") 
     for name, endpoint, topic, msg in fedmsg.tail_messages():
+        logger.debug(topic)
 
         # Print out a log statement if the day has changed
         today = datetime.date.today()
