@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 sh = logging.StreamHandler()
 sh.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
 logger.addHandler(sh)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 
 # Connect to pagure and set it to point to our repo
