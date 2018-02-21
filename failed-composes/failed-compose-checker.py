@@ -74,10 +74,9 @@ def main():
             date = today
             logger.info('mark')
 
-        print(topic) # some sort of indicator of progress
-
         if "pungi.compose.status.change" in topic:
             print('.', end='') # some sort of indicator of progress
+            print('.') # some sort of indicator of progress
 
             status = msg['msg']['status']
 
