@@ -131,7 +131,8 @@ def main():
             tag = re.search('(.*)-\d{8}', msg['msg']['compose_id']).group(1)
             #TODO figure out how to set tag on an issue
 
-            pg.create_issue(title=title, content=content)
+            if token:
+                pg.create_issue(title=title, content=content)
 
 if __name__ == '__main__':
     main()
