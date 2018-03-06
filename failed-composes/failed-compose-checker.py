@@ -93,7 +93,16 @@ def main():
             # variable to hold description for issue
             content = "[pungi.global.log](%s)\n\n" % logfileurl
 
-            lines = requests.get(logfileurl).text.splitlines()
+            # If we fail to get the log file contents then we'll just
+            # best effort put a message in the issue.
+            try:
+                lines = requests.get(logfileurl).text.splitlines()
+            except:
+                logger.info("Failed to retrieve log contents from server.. skipping analysis")
+                content+= "Failed to retrieve log contents from server.. skipping analysis"
+                lines = []
+                pass
+
             for x in range(1, len(lines)):
                 line = lines[x-1][20:]   # trim date off log lines
                 nextline = lines[x][20:] # trim date off log lines
