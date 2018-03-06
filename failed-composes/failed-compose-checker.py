@@ -45,6 +45,17 @@ KOJI_TASK_URL='https://koji.fedoraproject.org/koji/taskinfo?taskID='
 ########)
 
 
+def get_supporting_text(line):
+    """ given a log file line determine if it has a koji task ID in it
+        or not and give back an appropriate message
+    """
+    r = re.search('.*failed: (\d{8}).*', line)
+    if r:
+        taskid = r.group(1)
+        text = "- [%s](%s%s)\n" % (taskid, KOJI_TASK_URL, taskid)
+    else:
+        text = "- No Task ID, look at log statement\n"
+    return text
 
 def main():
     # grab token and connec to pagure
@@ -111,18 +122,14 @@ def main():
                 # next line and add them in markdown format. Also grab
                 # the taskid if we can and print a hyperlink to koji
                 if re.search('\[FAIL\]', line):
-                    r = re.search('.*failed: (\d{8}).*', nextline)
-                    if r:
-                        taskid = r.group(1)
-                        content+= "- [%s](%s%s)\n" % (taskid, KOJI_TASK_URL, taskid)
-                    else:
-                        content+= "- No Task ID, look at log statement\n"
+                    content+= get_supporting_text(nextline)
                     content+= "```\n%s\n%s\n```\n\n" % (line, nextline)
 
                 # If this is the Compose run failed line, then add it
                 # to the description too
                 if re.search('.*Compose run failed.*', line):
-                    content+= "- Compose run failed because:\n"
+                    content+= ("- Compose run failed because: %s\n" %
+                                            get_supporting_text(line))
                     content+= "```\n%s\n```\n" % (line)
 
             logger.debug(content)
