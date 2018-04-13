@@ -6,7 +6,7 @@ VERSION=$1
 REPO="./ostreerepo"
 REF="$2"
 #Can define URL as position arg if you like. If not will use default
-URL="${3-https://kojipkgs.fedoraproject.org/atomic/repo/}"
+URL="${3-https://dl.fedoraproject.org/atomic/repo/}"
 REMOTE="remote-${REF//\//-}"
 
 if [ ! -d $REPO ]; then
