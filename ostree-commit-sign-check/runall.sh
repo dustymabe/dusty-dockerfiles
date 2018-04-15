@@ -2,20 +2,20 @@
 dir=$(dirname $0)
 
 # f28
-bash $dir/run.sh 28 fedora/28/x86_64/atomic-host
-#bash $dir/run.sh 28 fedora/28/x86_64/updates/atomic-host
+#bash $dir/run.sh 28 fedora/28/x86_64/atomic-host
+bash $dir/run.sh 28 fedora/28/x86_64/updates/atomic-host
 bash $dir/run.sh 28 fedora/28/x86_64/testing/atomic-host
 
-bash $dir/run.sh 28 fedora/28/ppc64le/atomic-host
-#bash $dir/run.sh 28 fedora/28/ppc64le/updates/atomic-host
+#bash $dir/run.sh 28 fedora/28/ppc64le/atomic-host
+bash $dir/run.sh 28 fedora/28/ppc64le/updates/atomic-host
 bash $dir/run.sh 28 fedora/28/ppc64le/testing/atomic-host
 
-bash $dir/run.sh 28 fedora/28/aarch64/atomic-host
-#bash $dir/run.sh 28 fedora/28/aarch64/updates/atomic-host
+#bash $dir/run.sh 28 fedora/28/aarch64/atomic-host
+bash $dir/run.sh 28 fedora/28/aarch64/updates/atomic-host
 bash $dir/run.sh 28 fedora/28/aarch64/testing/atomic-host
 
-bash $dir/run.sh 28 fedora/28/x86_64/workstation         
-#bash $dir/run.sh 28 fedora/28/x86_64/updates/workstation
+#bash $dir/run.sh 28 fedora/28/x86_64/workstation         
+bash $dir/run.sh 28 fedora/28/x86_64/updates/workstation
 bash $dir/run.sh 28 fedora/28/x86_64/testing/workstation
 
 # f27
