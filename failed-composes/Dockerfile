@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:latest
+FROM registry.fedoraproject.org/fedora:28
 
 # Install pagure/fedmsg libraries
 RUN dnf -y install python3-libpagure python3-fedmsg && dnf clean all
